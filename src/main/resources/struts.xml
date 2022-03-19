@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+	"http://struts.apache.org/dtds/struts-2.3.dtd">
+
+<struts>
+	<!-- 所有匹配*.action的请求都由struts2处理 -->
+    <constant name="struts.action.extension" value="action,," />
+    <!-- 是否启用开发模式 -->
+    <constant name="struts.devMode" value="true" /> 
+    <constant name="struts.enable.DynamicMethodInvocation" value="true" />
+    <package name="default" namespace="/" extends="struts-default,json-default">
+    	<action name="randomAction" class="vms.action.RandomAction">
+      		<result type="stream">
+               <param name="contentType">image/jpeg</param>
+               <param name="inputName">inputStream</param>
+        	</result>
+ 		</action>
+ 		<action name="reAction" class="vms.action.ReAction">
+ 			<result type="json">
+                <param name="root">result</param>
+            </result>
+ 		</action>
+  		<action name="loginAction_*" class="vms.action.LoginAction" method="{1}">
+  			<result name="login">/login.jsp</result>
+  			<result name="admin" type="redirect">/jsp/index/adminindex.jsp</result>
+  			<result name="volunteer" type="redirect">/jsp/index/volunteerindex.jsp</result>
+  			<result name="uuser" type="redirect">/jsp/index/userindex.jsp</result>
+  			<result name="repassword">/jsp/regist/repassword.jsp</result>
+  			<result name="register">/jsp/regist/register.jsp</result>
+  			<result name="resultregister">/jsp/regist/resultregister.jsp</result>
+  		</action>
+  		<action name="registerAction_*" class="vms.action.RegisterTrackAction" method="{1}">
+  			<result name="login">/login.jsp</result>
+  			<result name="register">/jsp/regist/register.jsp</result>
+  		</action>
+  		<action name="registerInfo_*" class="vms.action.RegisterInfoAction" method="{1}">
+  			<result name="login">/login.jsp</result>
+  			<result name="registerInfoResult">/jsp/info/userinfo.jsp</result>
+  		</action>
+
+    </package>
+    
+    <package name="default1" namespace="/ssh-vms/jsp/index" extends="struts-default">
+    	<action name="registerInfoAction_*" class="vms.action.RegisterInfoAction" method="{1}">
+  			<result name="login">/login.jsp</result>
+  			<result name="registerInfoResult">/jsp/info/userinfo.jsp</result>
+  		</action>
+    	
+    
+    </package>
+    
+    
+    
+    
+</struts>

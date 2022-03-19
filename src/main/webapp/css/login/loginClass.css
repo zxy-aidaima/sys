@@ -1,0 +1,145 @@
+/* background-repeat: no-repeat;background-attachment: fixed;background-size:cover;
+ */
+.moveTo {
+	width: 700px;
+	height: 500px;
+	margin: auto;
+	
+}
+
+.loginClass {
+	width: 410px;
+	margin: 0 auto;
+	text-align: center;
+	border: 1px;
+	border-style: solid;
+	border-top-width: 1px;
+	border-right-width: 1px;
+	border-bottom-width: 1px;
+	border-left-width: 1px;
+	border-color: #abcafe;
+	float: left;
+	background-color: #ffffff;
+}
+
+.headTitle {
+	width: 410px;
+	text-align: center;
+	font-family: Times, TimesNR, 'New Century Schoolbook', Georgia,
+		'New York', serif;
+}
+.headTitleFont {
+	font-family: Times, TimesNR, 'New Century Schoolbook', Georgia,
+		'New York', serif;
+}
+.tableForm {
+	border: 0;
+	width: 300px;
+	margin-right: 50px;
+}
+
+.left {
+	text-align: left;
+}
+
+.right {
+	text-align: right;
+}
+
+.outHeight {
+	text-align: right;
+	padding: 15px 10px 15px 0px;
+}
+.tbHeight {
+	padding: 15px 0px 15px 0px;
+}
+
+.buttonLogin {
+	width: 150px;
+	padding: 6px 31px;
+	font-size: 15px;
+	line-height: 1.5;
+	border-radius: 4px;
+}
+
+.buttonSms{
+	width: 150px;
+	padding: 5px 1px;
+	font-size: 10px;
+	border-radius: 4px;
+	color: #48735f;
+}
+
+.resetButton {
+	border: 0;
+	background-color: transparent;
+	text-decoration: none;
+	cursor: pointer;
+	color: #337ab7;
+	font-size: 16px;
+	text-decoration: underline;
+}
+
+.toPointer {
+	cursor: pointer;
+}
+
+.errorDanger {
+	color: red;
+}
+
+.bubbleBig {
+	width: 150px;
+	height: 80px;
+	border-radius: 50%;
+	border: 2px;
+	border-color: #abcafe;
+	border-style: solid;
+	background-color: #ffffff;
+}
+
+.bubbleMiddle {
+	width: 15px;
+	height: 13px;
+	border-radius: 50%;
+	border: 2px;
+	border-color: #abcafe;
+	border-style: solid;
+	margin-left: 5px;
+	background-color: #ffffff;
+}
+
+.bubbleSmall {
+	margin-top: 3px;
+	width: 8px;
+	height: 7px;
+	border-radius: 50%;
+	border: 2px;
+	border-color: #abcafe;
+	border-style: solid;
+	background-color: #ffffff;
+}
+
+.bubbleCenter {
+	text-align: center;
+	margin: auto;
+	margin-top: 7px;
+}
+
+.bubbleMove {
+	padding-left: 90px;
+	float: left;
+}
+
+.divMove{
+	padding-top: 50px;
+	padding-left: 300px;
+}
+.divMoveCenter{
+	width:400px;
+	padding-top: 50px;
+	margin:0 auto;
+}
+.inputWidth{
+	width: 540px;
+}

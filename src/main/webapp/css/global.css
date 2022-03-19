@@ -1,0 +1,38 @@
+
+/*定义全局的div布局*/
+div#global{
+    /*设置宽度，设置百分比可以根据浏览器自适应宽度*/
+width: 100%;
+/*设置高度，950px是设置是实体高度，不能自适应的*/
+height: 591px;
+/*设置背景颜色，方便区分布局*/
+    background-color: black; 
+}
+/*定义头部布局，前面的div可以不用写，#号前面默认有个id，凡事定义了id的标签，都可以用#号来表示*/
+#heading{
+    width: 100%;
+    height: 50px;
+    background-color: #d6bafe;
+}
+#content_menu{
+    width: 18%;
+    height: 112%;
+    background-color: #c5dde7;
+    /*定义浮动，不定义的话，界面会乱*/
+    float: left;
+}
+#content_body{
+    width: 82%;
+    height: 104%;
+    background-color: #ffffff;
+    float: right;
+}
+#floor{
+    /*删除浮动，不然会被其他的浮动给遮住*/
+	width: 82%;
+	height: 8%;
+	float: right;
+	background-color: #abcafe;
+}
+
+
