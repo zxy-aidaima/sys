@@ -57,7 +57,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		<tr>
 			<td width=150px class="right col-sm-2 control-label outHeight">注册地址</td>
 			<td width=540px>
-				<div data-toggle="distpicker" class="city" width=540>
+				<div data-toggle="distpicker" class="city" width=540px>
 	  				<select class="form-control" style="width:180px;float:left;" name="register.registerprovince" data-province="-- 选择省 --"></select>
 	 				<select class="form-control" style="width:180px;float:left;" name="register.registercity" data-city="-- 选择市 --"></select>
 	  				<select class="form-control" style="width:180px;float:left;" name="register.registecounty" data-district="-- 选择区 --"></select>
