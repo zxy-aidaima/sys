@@ -15,6 +15,17 @@
 <script src="${pageContext.request.contextPath}/js/jquery-3.5.1.min.js"></script>
 <script src="${pageContext.request.contextPath}/js/bootstrap.min.js"></script>
 <link href="${pageContext.request.contextPath}/css/bootstrap.min.css" type="text/css" rel="stylesheet">
+<style>
+	.tableWidth{
+		width: 95px;
+	}
+	.col-sm-10{
+		width: 280px;
+	}
+	.table>tbody>tr>td{
+		border-top: 0px;
+	}
+</style>
 </head>
 <body>
 
@@ -131,17 +142,7 @@
 		</table>
 		</form>
 </div>
-<style>
-	.tableWidth{
-		width: 95px;
-	}
-	.col-sm-10{
-		width: 280px;
-	}
-	.table>tbody>tr>td{
-		border-top: 0px;
-	}
-</style>
+
 </body>
 
 

@@ -5,10 +5,10 @@
 String path = request.getContextPath();  
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";  
 %>
-<!DOCTYPE html>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<meta charset="utf-8">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <title>用户注册</title>
 <link rel="shortcut icon" href="img/logohead.ico" type="image/x-icon">
 <script src="js/jquery-3.5.1.min.js"></script>
@@ -57,7 +57,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		<tr>
 			<td width=150px class="right col-sm-2 control-label outHeight">注册地址</td>
 			<td width=540px>
-				<div data-toggle="distpicker" class="city" width=540px>
+				<div data-toggle="distpicker" class="city" width=540>
 	  				<select class="form-control" style="width:180px;float:left;" name="register.registerprovince" data-province="-- 选择省 --"></select>
 	 				<select class="form-control" style="width:180px;float:left;" name="register.registercity" data-city="-- 选择市 --"></select>
 	  				<select class="form-control" style="width:180px;float:left;" name="register.registecounty" data-district="-- 选择区 --"></select>

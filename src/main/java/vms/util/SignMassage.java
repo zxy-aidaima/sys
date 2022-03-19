@@ -13,7 +13,6 @@ public class SignMassage {
 		return java.net.URLEncoder.encode(value, "UTF-8").replace("+", "%20").replace("*", "%2A").replace("%7E", "~");
 	}
 
-	@SuppressWarnings("restriction")
 	public static String sign(String accessSecret, String stringToSign) throws Exception {
 		javax.crypto.Mac mac = javax.crypto.Mac.getInstance("HmacSHA1");
 		mac.init(new javax.crypto.spec.SecretKeySpec(accessSecret.getBytes("UTF-8"), "HmacSHA1"));

@@ -13,7 +13,7 @@
 			</div>
 			<div id="panel-element-732805" class="panel-collapse in">
 				<div class="panel-body">
-					</td><a href="registerInfo!findRegisterInfoResult.action?registerid=${registerid }&amp;roletype=${typeuser }" target="mainArea">查看信息</a>
+					<td><a href="registerInfo!findRegisterInfoResult.action?registerid=${registerid }&amp;roletype=${typeuser }" target="mainArea">查看信息</a></td>
 				</div>
 			</div>
 		</div>
