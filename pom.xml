@@ -154,8 +154,14 @@ http://maven.apache.org/maven-v4_0_0.xsd">
         <artifactId>struts2-json-plugin</artifactId>
         <version>2.3.16</version>
     </dependency>
-    
-    
+
+	<dependency>
+		<groupId>redis.clients</groupId>
+		<artifactId>jedis</artifactId>
+		<version>2.9.0</version>
+	</dependency>
+
+
   </dependencies>
   
   

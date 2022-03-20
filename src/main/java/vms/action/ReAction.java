@@ -12,8 +12,11 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.opensymphony.xwork2.ActionSupport;
 
+import redis.clients.jedis.ShardedJedis;
 import vms.entity.UserLogin;
+import vms.util.RedisUtil;
 import vms.util.SignMassage;
+import vms.util.StringUtils;
 import vms.util.TimeAndDate;
 
 public class ReAction extends ActionSupport {
@@ -54,18 +57,28 @@ public class ReAction extends ActionSupport {
 	}
 
 	public String execute() throws Exception {
-		// System.out.println("手机号：" + userLogin.getPhonenumber() + "密码：" +
-		// userLogin.getUpassword() + "时间戳：" + userLogin.getSendTime());
 		HttpServletRequest request = ServletActionContext.getRequest();
 		String phonenumber = request.getParameter("phonenumber");
 		String returnMessage = "";
 		String code = "";
+		boolean flag = false;
 		code = getSendCodeMessage();
 		Gson gson = new Gson();
 		System.out.println("手机号：" + phonenumber + " 验证码：" + code);
+		RedisUtil redisUtil = new RedisUtil();
+		ShardedJedis shardedJedis = redisUtil.getPool();
+		if (!shardedJedis.exists(phonenumber)) {
+			String strTime = StringUtils.getPropertiesValue("redisCheckCodeLiveTime", "app-config.properties");
+			String result = shardedJedis.set(phonenumber, code, "NX", "EX", Long.parseLong(strTime));
+		} else {
+			flag = true;
+		}
 		try {
-			// returnMessage = "{\"RequestId\":\"D0D92A9F-CF9C-4502-BDA1-AF15FCE192D6\",\"Message\":\"OK\",\"BizId\":\"838609709855352827^0\",\"Code\":\"OK\"}";
-			returnMessage = SignMassage.sendSms(SignMassage.createUrl(phonenumber, code));
+			if(!flag){
+				returnMessage = "{\"RequestId\":\"D0D92A9F-CF9C-4502-BDA1-AF15FCE192D6\",\"Message\":\"OK\",\"BizId\":\"838609709855352827^0\",\"Code\":\"OK\"}";
+				// 使用短信发送验证码功能时放开注释
+				// returnMessage = SignMassage.sendSms(SignMassage.createUrl(phonenumber, code));
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -73,26 +86,21 @@ public class ReAction extends ActionSupport {
 		Type userListType = new TypeToken<HashMap<String, String>>(){}.getType();
 		Map<String, String> messageMap = gson.fromJson(returnMessage, userListType);
 		Map<String, Object> map = new HashMap<String, Object>();
-		if ("OK".equals(messageMap.get("Message")) && "OK".equals(messageMap.get("Code"))) {
-			Long startTimes = TimeAndDate.getTimestamp();
+		if (messageMap != null && "OK".equals(messageMap.get("Message")) && "OK".equals(messageMap.get("Code"))) {
 			map.put("codemessage", "发送成功");
-			map.put("time", startTimes);
 			map.put("code", code);
+			result = gson.toJson(map);
+		} else if (flag) {
+			map.put("codemessage", "上次发送的验证码还没有失效");
+			map.put("code", "");
 			result = gson.toJson(map);
 		} else {
 			map.put("codemessage", "发送失败请稍后重试");
-			map.put("time", "");
 			map.put("code", "");
 			result = gson.toJson(map);
 		}
 		return SUCCESS;
 	}
-
-//	@Override
-//	public void setSession(Map<String, Object> session) {
-//		this.session = session;
-//
-//	}
 
 	public String getSendCodeMessage() {
 		int number = 0;

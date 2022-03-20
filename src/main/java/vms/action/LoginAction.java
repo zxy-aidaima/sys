@@ -10,10 +10,12 @@ import org.springframework.stereotype.Controller;
 
 import com.opensymphony.xwork2.ActionSupport;
 
+import redis.clients.jedis.ShardedJedis;
 import vms.entity.RegisterTrack;
 import vms.entity.UserLogin;
 import vms.service.IRegisterService;
 import vms.service.IUserService;
+import vms.util.RedisUtil;
 import vms.util.TimeAndDate;
 
 /**
@@ -131,13 +133,15 @@ public class LoginAction extends ActionSupport implements SessionAware {
 	}
 	
 	public String rePassword() {
-		// HttpServletRequest request = ServletActionContext.getRequest();
-		// String sendtime = request.getParameter("sendtime");
 		System.out.println(userLogin.getPhonenumber() + "---" + userLogin.getUpassword() + "---" + userLogin.getSendTime());
-		Long time = userLogin.getSendTime(); // 验证码生成时间
-		long chatime = time + 60000;
-		if(TimeAndDate.getTimestamp() >= chatime) {
+		RedisUtil redisUtil = new RedisUtil();
+		ShardedJedis shardedJedis = redisUtil.getPool();
+		String value = shardedJedis.get(userLogin.getPhonenumber());
+		if(value == null) {
 			message = "验证码过期";
+			return "repassword";
+		}else if(!value.equals(userLogin.getValidateCode())){
+			message = "验证码不正确";
 			return "repassword";
 		}
 		Boolean reflag = userService.rePassword(userLogin); // 更改密码

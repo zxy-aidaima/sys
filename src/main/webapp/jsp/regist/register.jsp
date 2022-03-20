@@ -114,16 +114,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			type : "POST", //用POST方式传输     　　
 			url : 'reAction.action?mt=' + Math.random(), //目标地址.
 			dataType : "json", //数据格式:JSON
-			//data: "dealType=" + dealType +"&uid=" + uid + "&code=" + code,
 			data : "&phonenumber=" + mobile,
 			success : function(data) {
 				var remessage = eval("(" + data + ")");
-				//alert(remassage.time +"---"+ remassage.code);
-				$("#codemessage").html(remessage.message);
-				$("#sendtime").val(remessage.time);
+				$("#codemessage").html(remessage.codemessage);
 				$("#code").val(remessage.code);
-				vcode = remessage.code;
-				vtime = remessage.time;
 			},
 			error : function() {
 				$("#codemessage").html("发送失败请重试");

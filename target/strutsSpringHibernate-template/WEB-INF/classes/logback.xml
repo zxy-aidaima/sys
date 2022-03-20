@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- 该配置文件中log的输出是输出到文件中，该文件每日滚动压缩打包备份，对于本应用的代码是info级别，对于其他的是warn级别。  -->
-<!-- 
+<!-- TRACE, DEBUG, INFO, WARN, ERROR, ALL, OFF
 	scan:
 		当此属性设置为true时，配置文件如果发生改变，将会被重新加载，默认值为true。
 	scanPeriod:
 		设置监测配置文件是否有修改的时间间隔，如果没有给出时间单位，默认单位是毫秒。
 		当scan为true时，此属性生效。默认的时间间隔为1分钟。 -->
 <configuration scan="true" scanPeriod="30 seconds">
+	<property name="logger.path" value="logs"></property>
 	<!-- 把日志添加到文件 -->
 	<appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
 		<!-- 当前Log文件名 -->
@@ -26,9 +27,9 @@
         </layout>
 	</appender>
 	
-	<logger name="org.github.mervyn.SSH.daoImpl" level="info"/>
+	<logger name="vms.daoImpl" level="info"/>
 	
-	<root level="warn">
+	<root level="trace">
         <appender-ref ref="FILE" />
     </root>
 

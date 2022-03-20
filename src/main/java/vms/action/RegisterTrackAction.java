@@ -9,8 +9,10 @@ import org.springframework.stereotype.Controller;
 
 import com.opensymphony.xwork2.ActionSupport;
 
+import redis.clients.jedis.ShardedJedis;
 import vms.entity.RegisterTrack;
 import vms.service.IRegisterService;
+import vms.util.RedisUtil;
 import vms.util.TimeAndDate;
 
 @Controller("registerAction")
@@ -45,13 +47,11 @@ public class RegisterTrackAction extends ActionSupport {
 	}
 	
 	public String applyRegister() {
-		// HttpServletRequest request = ServletActionContext.getRequest();
-		// String sendtime = request.getParameter("sendtime");
 		System.out.println(registerTrack.toString());
-		Long time = registerTrack.getSendTime(); // 验证码生成时间
-		System.out.println(time);
-		long chatime = time + 60000;
-		if(TimeAndDate.getTimestamp() >= chatime) {
+		RedisUtil redisUtil = new RedisUtil();
+		ShardedJedis shardedJedis = redisUtil.getPool();
+		String value = shardedJedis.get(registerTrack.getPhonenumber());
+		if(value == null) {
 			message = "验证码过期";
 			return "register";
 		}

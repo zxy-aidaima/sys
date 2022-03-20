@@ -1,5 +1,7 @@
 package vms.util;
 
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
@@ -22,5 +24,16 @@ public class StringUtils {
         }
 	    // 获取key对应的value值
         return props.getProperty(key);
+	}
+
+	/**
+	 * 獲取xml配置文件的數據
+	 */
+	public static String getXmlValue(String key, String pathName){
+
+		ClassPathXmlApplicationContext ctx =
+				new ClassPathXmlApplicationContext("applicationContext.xml");
+		String value = (String) ctx.getBean("user");
+		return value;
 	}
 }

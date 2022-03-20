@@ -40,7 +40,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			</tr>
 			<tr>
 				<td width=50% class="right col-sm-2 control-label outHeight">验证码</td>
-				<td width=50%><s:textfield class="form-control" id="code" name="validateCode" /></td>
+				<td width=50%><s:textfield class="form-control" id="code" name="user.validateCode" /></td>
 			</tr>
 			<tr>
 				<td width=50%><span id="codemessage"></span></td>
@@ -73,18 +73,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				type : "POST", //用POST方式传输     　　
 				url : 'reAction.action?mt=' + Math.random(), //目标地址.
 				dataType : "json", //数据格式:JSON
-				//data: "dealType=" + dealType +"&uid=" + uid + "&code=" + code,
 				data : "&phonenumber=" + mobile,
 				success : function(data) {
-					//console.log(data);
 					var remessage = eval("(" + data + ")");
-					//alert(remessage.message);
-					//alert(remassage.time +"---"+ remassage.code);
-					$("#codemessage").html(remessage.message);
-					$("#sendtime").val(remessage.time);
+					$("#codemessage").html(remessage.codemessage);
 					$("#code").val(remessage.code);
-					vcode = remessage.code;
-					vtime = remessage.time;
 				},
 				error : function() {
 					$("#codemessage").html("发送失败请重试");
@@ -130,20 +123,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				alert("密码与确认密码输入不一致！");
 				return false;
 			}
-			if(vcode != code){
-				alert("验证码输入错误！");
-				return false;
-			}
-			
-			var timestamp = (new Date()).getTime();
-			//console.log(timestamp);
-			//1609944046642
-			var times = vtime + 60000;
-			if(timestamp >= times){
-				alert("验证码过期！");
-				return false;
-			}
-
 		}
 		
 		
