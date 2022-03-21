@@ -14,6 +14,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <script src="js/jquery-3.5.1.min.js"></script>
 <script src="${pageContext.request.contextPath}/js/jquery-3.5.1.min.js"></script>
 <script src="${pageContext.request.contextPath}/js/bootstrap.min.js"></script>
+<script src="${pageContext.request.contextPath}/js/login/before-login.js"></script>
 <link href="${pageContext.request.contextPath}/css/bootstrap.min.css" type="text/css" rel="stylesheet">
 <link href="${pageContext.request.contextPath}/css/login/loginClass.css" type="text/css" rel="stylesheet">
 </head>
@@ -29,7 +30,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		</tr>
 		<tr>
 			<td width=50% class="right col-sm-2 control-label outHeight">验证码</td>
-			<td width=50%><s:textfield class="form-control" id="code" name="validateCode" /></td>
+			<td width=50%><s:textfield class="form-control" id="code" name="register.validateCode" /></td>
 		</tr>
 		<tr>
 			<td width=50%><span id="codemessage"></span></td>
@@ -78,55 +79,5 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 </table>
 </div>
 </div>
-
-	<script type="text/javascript">
-
-	var timeController; //timer变量，控制时间
-	var count = 5; //间隔函数，1秒执行
-	var remainCount;//当前剩余秒数
-	var vcode = "";
-	var vtime = "";
-	function sendMessage() {
-		remainCount = count;
-		//设置button效果，开始计时
-		$("#btnSendCode").attr("disabled", "true");
-		$("#btnSendCode").val("请在" + remainCount + "秒内输入验证码");//加上这一句不会出现延迟，否则倒计时延迟1s
-		timeController = setInterval("SetRemainTime()", 1000); //启动计时器，1秒执行一次
-		//向后台发送处理数据
-		var mobile = document.getElementById("phonenumber").value;
-		$.ajax({
-			asynch : "false",
-			type : "POST", //用POST方式传输     　　
-			url : 'reAction.action?mt=' + Math.random(), //目标地址.
-			dataType : "json", //数据格式:JSON
-			//data: "dealType=" + dealType +"&uid=" + uid + "&code=" + code,
-			data : "&phonenumber=" + mobile,
-			success : function(data) {
-				var remessage = eval("(" + data + ")");
-				//alert(remassage.time +"---"+ remassage.code);
-				$("#codemessage").html(remessage.message);
-				$("#sendtime").val(remessage.time);
-				$("#code").val(remessage.code);
-				vcode = remessage.code;
-				vtime = remessage.time;
-			},
-			error : function() {
-				$("#codemessage").html("发送失败请重试");
-			}
-		});
-	}
-	//timer处理函数
-	function SetRemainTime() {
-		if (remainCount == 0) {
-			clearInterval(timeController);//停止计时器
-			$("#btnSendCode").removeAttr("disabled");//启用按钮
-			$("#btnSendCode").val("重新发送验证码");
-		} else {
-			remainCount--;
-			$("#btnSendCode").val("请在" + remainCount + "秒内输入验证码");
-		}
-	}
-	
-</script>	
 </body>
 </html>

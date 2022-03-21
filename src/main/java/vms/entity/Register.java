@@ -1,13 +1,13 @@
 package vms.entity;
 
 public class Register {
-	private Long sendTime; // 时间戳
-	
-	public Long getSendTime() {
-		return sendTime;
+	private String validateCode; // 验证码
+
+	public String getValidateCode() {
+		return validateCode;
 	}
-	public void setSendTime(Long sendTime) {
-		this.sendTime = sendTime;
+	public void setValidateCode(String validateCode) {
+		this.validateCode = validateCode;
 	}
-	
+
 }

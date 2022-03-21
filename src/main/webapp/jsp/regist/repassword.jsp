@@ -14,11 +14,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <script src="js/jquery-3.5.1.min.js"></script>
 <script src="${pageContext.request.contextPath}/js/jquery-3.5.1.min.js"></script>
 <script src="${pageContext.request.contextPath}/js/bootstrap.min.js"></script>
+<script src="${pageContext.request.contextPath}/js/login/before-login.js"></script>
 <link href="${pageContext.request.contextPath}/css/bootstrap.min.css" type="text/css" rel="stylesheet">
 <link href="${pageContext.request.contextPath}/css/login/loginClass.css" type="text/css" rel="stylesheet">
 </head>
 <body style="background-image: url(${pageContext.request.contextPath}/image/backphoto.jpg);">
 <div class="divMove">
+	<span><h5 class="headTitle">修改密码<s:a href="./login.jsp">点击这里</s:a>返回首页</h5></span>
 	<table width="300px" border="0">
 		<s:form action="loginAction!rePassword.action" theme="simple" name="reform" onsubmit="return validateForm()" method="post">
 			<s:textfield id="sendtime" type="hidden" name="user.sendTime" value=""/>
@@ -28,15 +30,15 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			</tr>
 			<tr>
 				<td width=50% class="right col-sm-2 control-label outHeight">手机号码</td>
-				<td width=50%><s:textfield class="form-control" id="mobile" name="user.phonenumber" value="13231781681" /></td>
+				<td width=50%><s:textfield class="form-control" id="phonenumber" name="user.phonenumber" value="13231781681" /></td>
 			</tr>
 			<tr>
 				<td width=50% class="right col-sm-2 control-label outHeight">密码</td>
-				<td width=50%><s:textfield class="form-control" id="upwd" name="user.upassword" /></td>
+				<td width=50%><s:password class="form-control" id="upwd" name="user.upassword" /></td>
 			</tr>
 			<tr>
 				<td width=50% class="right col-sm-2 control-label outHeight">确认密码</td>
-				<td width=50%><s:textfield class="form-control" id="surepwd" name="sureupassword" /></td>
+				<td width=50%><s:password class="form-control" id="surepwd" name="sureupassword" /></td>
 			</tr>
 			<tr>
 				<td width=50% class="right col-sm-2 control-label outHeight">验证码</td>
@@ -54,82 +56,35 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		</s:form>
 	</table>
 </div>
-	<script>
-		var timeController; //timer变量，控制时间
-		var count = 5; //间隔函数，1秒执行
-		var remainCount;//当前剩余秒数
-		var vcode = "";
-		var vtime = "";
-		function sendMessage() {
-			remainCount = count;
-			//设置button效果，开始计时
-			$("#btnSendCode").attr("disabled", "true");
-			$("#btnSendCode").val("请在" + remainCount + "秒内输入验证码");//加上这一句不会出现延迟，否则倒计时延迟1s
-			timeController = setInterval("SetRemainTime()", 1000); //启动计时器，1秒执行一次
-			//向后台发送处理数据
-			var mobile = document.getElementById("mobile").value;
-			$.ajax({
-				asynch : "false",
-				type : "POST", //用POST方式传输     　　
-				url : 'reAction.action?mt=' + Math.random(), //目标地址.
-				dataType : "json", //数据格式:JSON
-				data : "&phonenumber=" + mobile,
-				success : function(data) {
-					var remessage = eval("(" + data + ")");
-					$("#codemessage").html(remessage.codemessage);
-					$("#code").val(remessage.code);
-				},
-				error : function() {
-					$("#codemessage").html("发送失败请重试");
-				}
-			});
+<script type="text/javascript">
+	// 表单验证
+	function validateForm(){
+		var mobile = $("#phonenumber").val().trim();
+		var code = $("#code").val().trim();
+		var upwd = $("#upwd").val().trim();
+		var surepwd = $("#surepwd").val().trim();
+
+		if(null == mobile || mobile == ""){
+			alert("手机号不能为空！");
+			return false;
 		}
-		//timer处理函数
-		function SetRemainTime() {
-			if (remainCount == 0) {
-				clearInterval(timeController);//停止计时器
-				$("#btnSendCode").removeAttr("disabled");//启用按钮
-				$("#btnSendCode").val("重新发送验证码");
-			} else {
-				remainCount--;
-				$("#btnSendCode").val("请在" + remainCount + "秒内输入验证码");
-			}
+		if(null == code || code == ""){
+			alert("验证码不能为空！");
+			return false;
 		}
-		// 表单验证
-		function validateForm(){
-			debugger;
-			var mobile = $("#mobile").val().trim();
-			var code = $("#code").val().trim();
-			var upwd = $("#upwd").val().trim();
-			var surepwd = $("#surepwd").val().trim();
-			
-			if(null == mobile || mobile == ""){
-				alert("手机号不能为空！");
-				return false;
-			}
-			if(null == code || code == ""){
-				alert("验证码不能为空！");
-				return false;
-			}
-			if(null == upwd || upwd == ""){
-				alert("密码不能为空！");
-				return false;
-			}
-			if(null == surepwd || surepwd == ""){
-				alert("确认密码不能为空！");
-				return false;
-			}
-			if(upwd != surepwd){
-				alert("密码与确认密码输入不一致！");
-				return false;
-			}
+		if(null == upwd || upwd == ""){
+			alert("密码不能为空！");
+			return false;
 		}
-		
-		
-		
-		
-		
-		
-	</script>
+		if(null == surepwd || surepwd == ""){
+			alert("确认密码不能为空！");
+			return false;
+		}
+		if(upwd != surepwd){
+			alert("密码与确认密码输入不一致！");
+			return false;
+		}
+	}
+</script>
 </body>
 </html>

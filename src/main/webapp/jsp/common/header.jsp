@@ -13,6 +13,5 @@
 	<c:if test="${typeuser eq '2' }" >
 		<span class="small">(用户)</span>
 	</c:if>
-	
 	</h1>
 </div>

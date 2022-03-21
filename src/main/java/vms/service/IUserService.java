@@ -23,8 +23,6 @@ public interface IUserService {
 	/**
 	 * 根据用户查询用户登录信息
 	 * 2020年12月25日
-	 * @param id 账号
-	 * @param pwd 密码
 	 */
 	UserLogin findUserLogin(UserLogin userLogin);
 	

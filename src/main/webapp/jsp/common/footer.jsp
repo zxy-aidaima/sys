@@ -1,10 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<script type="text/javascript">
-<!--
-
-//-->
-</script>
-
+<script src="${pageContext.request.contextPath}/js/jquery-3.5.1.min.js"></script>
+<link rel="stylesheet" type="text/css" media="screen" href="${pageContext.request.contextPath}/css/bootstrap.min.css">
 <link href="${pageContext.request.contextPath}/css/footer-style.css" type="text/css" rel="stylesheet">
 <div class="footer">
 	<div class="footer-inner">
@@ -17,23 +13,23 @@
 			<!-- 页脚   连接 -->
 			&nbsp; &nbsp;
 			<span class="action-buttons">
-				<a href="www.baidu.com" title="Baidu" baitarget="_blank">
+				<a href="http://www.baidu.com" title="Baidu" baitarget="_blank">
 					<i class="ace-icon fa fa-twitter-square light-blue bigger-150">百度</i>
 				</a>
 
-				<a href="www.google.com" title="Google" baitarget="_blank">
+				<a href="http://www.google.com" title="Google" baitarget="_blank">
 					<i class="ace-icon fa fa-facebook-square text-primary bigger-150">谷歌</i>
 				</a>
 
-				<a href="www.so.com" title="360" baitarget="_blank">
-					<i class="ace-icon fa fa-rss-square orange bigger-150">360</i>
+				<!-- 置顶按钮 -->
+				<a href="#" id="btn-top" title="返回顶部" style="margin-top: 3px;margin-right: 20px;float:right;">
+					<i>^</i>
+					<%--					<span class="glyphicon glyphicon-eject"></span>--%>
 				</a>
 			</span>
-			
+
 		</div>
+
 	</div>
+
 </div>
-<!-- 页脚收起按钮 -->
-<a href="#" id="btn-scroll-up" class="btn-scroll-up btn btn-sm btn-inverse">
-	<i class="ace-icon fa fa-angle-double-up icon-only bigger-110"></i>
-</a>

@@ -179,7 +179,7 @@ public class UserDao extends BaseDao<UserLogin, Integer> implements IUserDao {
 					queryInfo.setParameter("phonenumber", resultRegisterTrack.getPhonenumber());
 					RegisterInfo registerTrackInfo =  (RegisterInfo) queryInfo.list().get(0);
 					if(null != registerTrackInfo) {
-						String text2 = "审核人" + registerTrackInfo.getApprovename() + "在" + registerTrackInfo.getRegisterdate() + "审核了您提交的申请。结果：通过。您的账号：" + registerTrackInfo.getRegisterid() + "默认密码：1234。请及时前往首页登陆有更改密码。";
+						String text2 = "审核人" + registerTrackInfo.getApprovename() + "在" + registerTrackInfo.getRegisterdate() + "审核了您提交的申请。结果：通过。您的账号：" + registerTrackInfo.getRegisterid() + "默认密码：1234。请及时前往登陆页更改密码。";
 						pass.add(text2);
 					}else {
 						logger.info("用户[手机号]：[" + registerTrackList.get(0).getPhonenumber() + "]:[不存在]");

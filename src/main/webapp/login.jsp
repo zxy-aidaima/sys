@@ -87,39 +87,38 @@
 </div>
 </div>
 </div>
-	<script type="text/javascript">
-		function reCheckcode(img) {
-			img.src = "randomAction.action?t=" + Math.random();
+<script type="text/javascript">
+	function reCheckcode(img) {
+		img.src = "randomAction.action?t=" + Math.random();
+	}
+
+	// 表单验证
+	function validateForm() {
+		var registerid = $("#registerid").val().trim();
+		var upwd = $("#upassword").val().trim();
+		var code = $("#validateCode").val().trim();
+
+		if (null == registerid || registerid == "") {
+			alert("账号不能为空！");
+			return false;
+		}
+		if (null == code || code == "") {
+			alert("验证码不能为空！");
+			return false;
+		}
+		if (null == upwd || upwd == "") {
+			alert("密码不能为空！");
+			return false;
 		}
 
-		// 表单验证
-		function validateForm() {
-			/* debugger; */
-			var registerid = $("#registerid").val().trim();
-			var upwd = $("#upassword").val().trim();
-			var code = $("#validateCode").val().trim();
+	}
 
-			if (null == registerid || registerid == "") {
-				alert("账号不能为空！");
-				return false;
-			}
-			if (null == code || code == "") {
-				alert("验证码不能为空！");
-				return false;
-			}
-			if (null == upwd || upwd == "") {
-				alert("密码不能为空！");
-				return false;
-			}
-			
-		}
-
-		function reset(){
-			$("#registerid").val("");
-			$("#upassword").val("");
-			$("#validateCode").val("");
-		} 
-	</script>
+	function reset(){
+		$("#registerid").val("");
+		$("#upassword").val("");
+		$("#validateCode").val("");
+	}
+</script>
 
 </body>
 </html>

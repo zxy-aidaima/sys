@@ -133,7 +133,7 @@ public class LoginAction extends ActionSupport implements SessionAware {
 	}
 	
 	public String rePassword() {
-		System.out.println(userLogin.getPhonenumber() + "---" + userLogin.getUpassword() + "---" + userLogin.getSendTime());
+		System.out.println(userLogin.getPhonenumber() + "---" + userLogin.getUpassword());
 		RedisUtil redisUtil = new RedisUtil();
 		ShardedJedis shardedJedis = redisUtil.getPool();
 		String value = shardedJedis.get(userLogin.getPhonenumber());
@@ -156,24 +156,26 @@ public class LoginAction extends ActionSupport implements SessionAware {
 	
 	public String findRegisterResult() {
 		System.out.println(registerTrack.toString());
-		Long time = registerTrack.getSendTime(); // 验证码生成时间
-		System.out.println(time);
-		long chatime = time + 60000;
-		if(TimeAndDate.getTimestamp() >= chatime) {
-			message = "验证码过期";
-			return "register";
-		}
-		Map<String, Object> registerMap = userService.searchRegisterResult(registerTrack); 
+        RedisUtil redisUtil = new RedisUtil();
+        ShardedJedis shardedJedis = redisUtil.getPool();
+        String value = shardedJedis.get(registerTrack.getPhonenumber());
+        if(value == null) {
+            message = "验证码过期";
+            return "register";
+        }else if(!value.equals(registerTrack.getValidateCode())){
+            message = "验证码不正确";
+            return "register";
+        }
+		Map<String, Object> registerMap = userService.searchRegisterResult(registerTrack);
 		if(!registerMap.isEmpty()) {
 			resultRegister = registerMap;
 			messageReturn = "申请注册查询结果轨迹";
-			return "resultregister";
-		}else {
+        }else {
 			message = "申请注册查询出错";
-			return "resultregister";
-		}
-			
-	}
+        }
+        return "resultregister";
+
+    }
 	
 	public String toRegister() {
 		return "register";
